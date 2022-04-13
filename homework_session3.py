@@ -26,14 +26,14 @@ for item in df['item']:
     print(item) 
 # df['item']
 
-window = visual.Window(size = (400, 400))
-message = visual.TextStim(window)
+# window = visual.Window(size = (400, 400))
+# message = visual.TextStim(window)
 
-for item in df['item']:  
-    message.text = item
-    message.draw() #draw the message but not on the screen, but on a screen buffer 
-    window.flip() 
-    core.wait(1.0)
+# for item in df['item']:  
+#     message.text = item
+#     message.draw() #draw the message but not on the screen, but on a screen buffer 
+#     window.flip() 
+#     core.wait(1.0)
 
 
 window = visual.Window(size = (400, 400))
@@ -41,9 +41,33 @@ message = visual.TextStim(window)
 
 for file in df['image_file']:
     image = visual.ImageStim(window, file)
+    images.append(image)
+
+
+images = np.random.permutation(images)
+for image in images[:4]: 
     image.draw()
     window.flip()
-    core.wait(1.0)
+    clock.reset()
+    keys = event.waitKeys(maxWait= 5, keyList=['z', 'm'], clearEvents=True)
+    if keys is not None:
+        # print(keys)
+        key, end_time = keys[0]
+    else: 
+        key = None
+        end_time = clock.getTime()
+
+        # print(clock.getTime())
+        results.append({
+            'start_time': start_time
+            'end_time': end_time, 
+            'key': key
+
+        })
+
+        results = pd.DataFrame(results)
+        results['reaction_time'] = results ['end_time'] - results['start_time']
+        results.to_csv('demo_output.csv')
 
 ## Exercise B
 # 1. Load the lexical decision stimuli file 
