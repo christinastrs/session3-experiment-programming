@@ -12,7 +12,7 @@
 # 5. Loop over the item paths, and use them to create image stimuli;
 #     display each image for 1 second.
 
-from psychopy import visual,sound, core
+from psychopy import visual,sound, core, event
 import pandas as pd
 import time
 import os
@@ -81,3 +81,5 @@ random.shuffle(loaded_hf_audio_list)
 for audiofile in loaded_hf_audio_list:
     audiofile.play()
     core.wait(2.0) 
+
+
