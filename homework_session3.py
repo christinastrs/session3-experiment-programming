@@ -18,6 +18,7 @@ import time
 import os
 from PIL import Image 
 import random
+import numpy as np
 random.seed(42)
 
 df = pd.read_csv("picture_verification_stimuli.csv")
@@ -38,7 +39,8 @@ for item in df['item']:
 
 window = visual.Window(size = (400, 400))
 message = visual.TextStim(window)
-
+clock = core.Clock()
+images = []
 for file in df['image_file']:
     image = visual.ImageStim(window, file)
     images.append(image)
@@ -48,6 +50,7 @@ images = np.random.permutation(images)
 for image in images[:4]: 
     image.draw()
     window.flip()
+    start_time = clock.getTime()
     clock.reset()
     keys = event.waitKeys(maxWait= 5, keyList=['z', 'm'], clearEvents=True)
     if keys is not None:
@@ -77,15 +80,15 @@ for image in images[:4]:
 #    (you can specify the relative path as f'sounds/HF/{sound_name}.wav')
 # 4. Play the sounds one-by-one, making sure there is some time between them
 
-ld_df = pd.read_csv("lexical_decision_stimuli.csv")
-ld_df_hf_only = ld_df[ld_df['freq_category']=='HF']
+# ld_df = pd.read_csv("lexical_decision_stimuli.csv")
+# ld_df_hf_only = ld_df[ld_df['freq_category']=='HF']
 
 
-ld_df_hf_only
-for sound_file in ld_df_hf_only['word']:
-    audio = sound.Sound(f'sounds/HF/{sound_file}.wav')
-    audio.play()
-    core.wait(2.0) 
+# ld_df_hf_only
+# for sound_file in ld_df_hf_only['word']:
+#     audio = sound.Sound(f'sounds/HF/{sound_file}.wav')
+#     audio.play()
+#     core.wait(2.0) 
 
 
 ## Bonus exercise
@@ -95,15 +98,15 @@ for sound_file in ld_df_hf_only['word']:
 #     to show/play them one by one.
 # 2. Before showing/playing, try to randomise the order of stimuli; 
 #     Google how to randomise the order of a list!
-loaded_hf_audio_list = []
-for sound_file in ld_df_hf_only['word']:
-    loaded_hf_audio_list.append(sound.Sound(f'sounds/HF/{sound_file}.wav'))
+# loaded_hf_audio_list = []
+# for sound_file in ld_df_hf_only['word']:
+#     loaded_hf_audio_list.append(sound.Sound(f'sounds/HF/{sound_file}.wav'))
 
 
-random.shuffle(loaded_hf_audio_list)
+# random.shuffle(loaded_hf_audio_list)
 
-for audiofile in loaded_hf_audio_list:
-    audiofile.play()
-    core.wait(2.0) 
+# for audiofile in loaded_hf_audio_list:
+#     audiofile.play()
+#     core.wait(2.0) 
 
 
