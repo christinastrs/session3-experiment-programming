@@ -62,11 +62,9 @@ for image in images[:4]:
 
         # print(clock.getTime())
         results.append({
-            'start_time': start_time
+            'start_time': start_time,
             'end_time': end_time, 
-            'key': key
-
-        })
+            'key': key})
 
         results = pd.DataFrame(results)
         results['reaction_time'] = results ['end_time'] - results['start_time']
