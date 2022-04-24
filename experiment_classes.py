@@ -21,6 +21,14 @@ class Item:
 
 
 
+class Trial: 
+    def __init__(self, experiment, name, stimulus, fixation_time = 0.5, max_key_wait = 5, keys= ['z', 'm'])
+        self.name = name
+        self.experiment = experiment 
+        self.stimulus = stimulus 
+        self.fixation_time = fixation_time #copy paste from teun's code -- this is unfinished 
 
+
+def run(self):  #copy paste teun's code -- unfinished 
 
         
